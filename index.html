@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SVG test</title>
+    <meta charset="UTF8" />
+    <style>
+      * {
+        box-sizing: border-box;
+        /* transition: 0.25s; */
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 12px;
+      }
+      .sprite {
+        display: block;
+        width: 32px;
+        height: 32px;
+      }
+      body, html, body>svg {
+        padding: 0px;
+        margin: 0px;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        background-color: rgba(70, 70, 70, 0.247);
+      }
+      body {
+        display: flex;
+      }
+      .controll {
+        display: inline-block;
+        width: 240px;
+        height: 300px;
+        padding: 16px;
+      }
+      .controll>input {
+        width: 100%;
+      }
+      body>svg {
+        width: 400px;
+        height: 300px;
+        background: url('bg.png') rgba(70, 70, 70, 0.247);
+        display: inline-block;
+      }
+      body>svg>polygon {
+        fill-opacity: 0.5;
+      }
+      body>svg>polygon:hover {
+        fill-opacity: 1;
+      }
+      label {
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="controll">
+      <label for="inp_target">Target weight:</label>
+      <input id="inp_target" type="range" />
+      <label for="inp_crowd">Crowd weight:</label>
+      <input id="inp_crowd" type="range" />
+      <label for="inp_crowd">Cursor weight:</label>
+      <input id="inp_cursor" type="range" />
+    </div>
+  </body>
+  <script src="script.js"></script>
+</html>
