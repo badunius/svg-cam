@@ -204,6 +204,7 @@ function solve() {
 }
 
 function render(time) {
+  const radLim = 200 * 200
   const delta = time - SCENE.time
   SCENE.time = time
   SCENE.unit.forEach(u => u.update(delta / 1000))
@@ -212,18 +213,20 @@ function render(time) {
 
   const target = new Vector(SCENE.unit[0].pos)
   const cursor = new Vector(SCENE.CUR)
-  const crowd = SCENE
+  const focus = SCENE
     .unit
     .slice(1)
-    .filter(el => el.pos.sub(target).qLen < 40000)
+    .filter(el => el.pos.sub(target).qLen < radLim)
+  const crowd = focus
     .reduce(
       (prev, curr) => {
         const item = curr.pos.sub(target)
-        return prev.add(item)
+        const weight = (radLim - item.qLen) / radLim
+        return prev.add(item.mult(weight))
       }, 
-      new Vector({})
+      Vector.make(0, 0)
     )
-    .mult(1 / (SCENE.unit.length - 1))
+    .mult(1 / (focus.length + 1))
 
   const {
     x,
